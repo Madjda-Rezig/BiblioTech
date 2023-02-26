@@ -1,7 +1,6 @@
 {
   "name": "bibliotech",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,6 @@
   "bugs": {
     "url": "https://github.com/Madjda-Rezig/BiblioTech/issues"
   },
-  "homepage": "https://github.com/Madjda-Rezig/BiblioTech#readme"
+  "homepage": "https://github.com/Madjda-Rezig/BiblioTech#readme",
+  "description": ""
 }
