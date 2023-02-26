@@ -15,5 +15,14 @@
     "url": "https://github.com/Madjda-Rezig/BiblioTech/issues"
   },
   "homepage": "https://github.com/Madjda-Rezig/BiblioTech#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.10.0",
+    "nodemon": "^2.0.20"
+  }
 }
