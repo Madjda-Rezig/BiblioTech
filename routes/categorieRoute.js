@@ -3,12 +3,12 @@ const {
     postCategorie,
     deleteCategorie
   } = require("../controllers/categorieController")
-  const categorieRoute = require("express").Router()
+  const categorieRouter = require("express").Router()
   
-  categorieRoute
+  categorieRouter
     .get("/all", getAllCategories)
     .post("/add", postCategorie)
     .delete("/:id", deleteCategorie)
    
-  module.exports = categorieRoute
+  module.exports = categorieRouter
   

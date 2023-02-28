@@ -59,4 +59,4 @@ UserSchema.discriminator("employé", EmployeSchema)
 UserSchema.discriminator("lecteur", LecteurSchema)
 
 
-module.exports = mongoose.model("Utilisateur", UserSchema)
+module.exports = mongoose.model("users", UserSchema)

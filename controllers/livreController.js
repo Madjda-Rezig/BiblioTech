@@ -24,10 +24,13 @@ exports.getAllLivres = expressAsyncHandler(async (req, res) => {
 //Ajouter un livre
 exports.postLivre = expressAsyncHandler(async (req, res) => {
   try {
-    const {  nomLivre, auteur ,IdCategorie} =
+    const {  nomLivre, auteur ,note,IdCategorie,nombreTotalExemplaires,nombreExemplairesEmpruntes} =
       req.body
     if (
       !nomLivre ||
+      !note ||
+      !nombreTotalExemplaires ||
+      !nombreExemplairesEmpruntes ||
       !auteur 
     ) {
       res.status(400).json("Impossible d'ajouter le livre a la bibliothèque !!")
@@ -36,7 +39,11 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
     await livreModel.create({
         nomLivre, 
         auteur ,
+        note,
         IdCategorie,
+        nombreExemplairesEmpruntes,
+        nombreTotalExemplaires
+
     })
     res.status(201).json("Le livre a été ajouté a la bibliothèque !")
   } catch (error) {

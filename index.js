@@ -4,8 +4,9 @@ const mongoose = require("mongoose")
 const ErrorHandler = require("./middlewares/ErrorHandler")
 const livreRouter = require("./routes/livreRoute")
 const userRouter = require("./routes/userRoute")
-const categorieRoute = require("./routes/categorieRoute")
-const authRouter = require("./routes/authentificationRouter")
+const categorieRouter = require("./routes/categorieRoute")
+const authRouter = require("./routes/authentificationRoute")
+const empruntRouter = require("./routes/empruntRoute")
 
 require("dotenv").config()
 
@@ -13,10 +14,10 @@ const index = express()
 index.use(express.json())
 index.use(express.urlencoded({ extended: true }))
 
-index.use("/livre", livreRouter)
+index.use("/livres", livreRouter)
 index.use("/users", userRouter)
-index.use("/categories", categorieRoute)
-
+index.use("/categories", categorieRouter)
+index.use("/emprunt", empruntRouter)
 index.use("/authentification", authRouter)
 
 index.use("/*", (req, res) => {
