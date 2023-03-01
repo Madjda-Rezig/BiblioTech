@@ -8,13 +8,31 @@ const expressAsyncHandler = require("express-async-handler")
 
 exports.getAllLivres = expressAsyncHandler(async (req, res) => {
   try {
-    const livres = await livreModel.find()
-    res.status(200).json(livres)
+    const { categorie, auteur, note, nombreExemplairesEmpruntes } = req.query;
+
+    // ajout d'un filtre
+    const filter = {};
+    if (categorie) {
+      filter.IdCategorie = categorie;
+    }
+    if (auteur) {
+      filter.auteur = auteur;
+    }
+    if (note) {
+      filter.note = note;
+    }
+    if (nombreExemplairesEmpruntes) {
+      filter.nombreExemplairesEmpruntes = nombreExemplairesEmpruntes;
+    }
+
+    const livres = await livreModel.find(filter);
+    res.status(200).json(livres);
   } catch (error) {
-    res.status(400)
-    console.error(error)
+    res.status(400).json({ message: "une erreur est survenu lors de votre recherche" });
+    console.error(error);
   }
-})
+});
+
 
 
 
@@ -49,6 +67,18 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
   } catch (error) {
     res.status(400)
     console.log(error)
+  }
+})
+
+// Supprimer une offre :
+exports.deleteLivre = expressAsyncHandler(async (req, res) => {
+  try {
+    const id = req.params.id
+    await livreModel.findByIdAndDelete(id)
+    res.status(201).json("Vous avez supprimé ce Livre ")
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
   }
 })
 

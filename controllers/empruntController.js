@@ -1,5 +1,6 @@
 const empruntModel = require("../models/empruntModel");
 const livreModel = require("../models/livreModel");
+const UserModel = require("../models/userModel")
 const expressAsyncHandler = require("express-async-handler");
 
 //Afficher tous les emprunts
