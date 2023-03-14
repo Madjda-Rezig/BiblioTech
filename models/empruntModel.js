@@ -28,7 +28,10 @@ const empruntModel = new mongoose.Schema(
     dateRetour: {
       type: Date,
     },
-   
+    renouvele: {
+      type: Boolean,
+      default: false,
+    },
    
   },
   { timestamps: true }

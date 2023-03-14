@@ -1,4 +1,4 @@
-const { getAllEmprunts,addEmprunt,deleteEmprunt,updateEmprunt,getEmpruntsByUser} = require("../controllers/empruntController");
+const { getAllEmprunts,addEmprunt,deleteEmprunt,updateEmprunt,getEmpruntsByUser,renewEmprunt} = require("../controllers/empruntController");
 
 const empruntRouter = require("express").Router();
 
@@ -13,5 +13,7 @@ empruntRouter.put("/:id", updateEmprunt);
 
 
 empruntRouter.get('/users/:id/emprunts', getEmpruntsByUser);
+
+empruntRouter.put("/renouveler/:id", renewEmprunt);
 
 module.exports = empruntRouter;

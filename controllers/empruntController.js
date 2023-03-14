@@ -5,8 +5,6 @@ const expressAsyncHandler = require("express-async-handler");
 
 //Afficher tous les emprunts
 
-
-// Controller function to retrieve all emprunt documents
 exports.getAllEmprunts = async (req, res) => {
   try {
     const emprunts = await empruntModel.find({})
@@ -109,6 +107,46 @@ exports.getEmpruntsByUser = expressAsyncHandler(async (req, res) => {
     console.error(error);
   }
 });
+
+
+//RENOUVELEMENT
+exports.renewEmprunt = expressAsyncHandler(async (req, res) => {
+  try {
+    const { idEmprunt } = req.params;
+
+    // Vérifier si l'emprunt existe
+    const emprunt = await empruntModel.findById(idEmprunt);
+    if (!emprunt) {
+      res.status(404).json({ message: "Emprunt introuvable" });
+      return;
+    }
+
+    // Vérifier si le livre est disponible pour le renouvellement
+    const livreDisponible = await livreModel.findById(emprunt.idLivre);
+    if (!livreDisponible.disponible) {
+      res.status(400).json({ message: "Le livre n'est pas disponible pour le renouvellement" });
+      return;
+    }
+
+    // Mettre à jour la date de retour de l'emprunt
+    const today = new Date();
+    const newDateRetour = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // Ajouter 7 jours
+    emprunt.dateRetour = newDateRetour;
+    await emprunt.save();
+
+    // Mettre à jour l'état du livre
+    livreDisponible.disponible = false;
+    await livreDisponible.save();
+
+    res.status(200).json({ message: "L'emprunt a été renouvelé avec succès", emprunt });
+  } catch (error) {
+    res.status(500).json({ message: "Impossible de renouveler l'emprunt" });
+    console.error(error);
+  }
+});
+
+
+
 
 
 
