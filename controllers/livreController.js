@@ -1,8 +1,7 @@
 const livreModel = require("../models/livreModel")
-
-
-
-const expressAsyncHandler = require("express-async-handler")
+const nodemailer = require("nodemailer")
+const UserModel = require("../models/userModel")
+const expressAsyncHandler = require("express-async-handler");
 
 //Afficher touts les livres
 
@@ -42,7 +41,7 @@ exports.getAllLivres = expressAsyncHandler(async (req, res) => {
 //Ajouter un livre
 exports.postLivre = expressAsyncHandler(async (req, res) => {
   try {
-    const {  nomLivre, auteur ,note,IdCategorie,nombreTotalExemplaires,nombreExemplairesEmpruntes} =
+    const {  nomLivre, auteur ,note,IdCategorie,nombreTotalExemplaires,nombreExemplairesEmpruntes,disponible} =
       req.body
     if (
       !nomLivre ||
@@ -60,9 +59,11 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
         note,
         IdCategorie,
         nombreExemplairesEmpruntes,
-        nombreTotalExemplaires
+        nombreTotalExemplaires,
+        disponible
 
     })
+    
     res.status(201).json("Le livre a été ajouté a la bibliothèque !")
   } catch (error) {
     res.status(400)
@@ -70,7 +71,7 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
   }
 })
 
-// Supprimer une offre :
+// Supprimer un livre :
 exports.deleteLivre = expressAsyncHandler(async (req, res) => {
   try {
     const id = req.params.id

@@ -12,14 +12,22 @@ const empruntModel = new mongoose.Schema(
       ref: "Livre",
       required: true,
     },
-    date: {
-        type:Date,
-        required: true,
-      },
-    temp: {
-        type: String,
-        required: true,
-      },
+    nomLivre: {
+      type: String,
+      
+    },
+    auteur: {
+      type: String,
+      
+    },
+    dateEmprunt: {
+      type: Date,
+      
+      default: Date.now,
+    },
+    dateRetour: {
+      type: Date,
+    },
    
    
   },

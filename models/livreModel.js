@@ -29,6 +29,11 @@ const livreModel = new mongoose.Schema(
       required: true,
       default: 0,
     },
+    disponible: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
   { timestamps: true }
 );
