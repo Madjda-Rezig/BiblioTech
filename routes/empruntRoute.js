@@ -14,6 +14,6 @@ empruntRouter.put("/:id", updateEmprunt);
 
 empruntRouter.get('/users/:id/emprunts', getEmpruntsByUser);
 
-empruntRouter.put("/renouveler/:id", renewEmprunt);
+empruntRouter.put("/renew/:id", renewEmprunt);
 
 module.exports = empruntRouter;

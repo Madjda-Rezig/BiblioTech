@@ -121,12 +121,6 @@ exports.renewEmprunt = expressAsyncHandler(async (req, res) => {
       return;
     }
 
-    // Vérifier si le livre est disponible pour le renouvellement
-    const livreDisponible = await livreModel.findById(emprunt.idLivre);
-    if (!livreDisponible.disponible) {
-      res.status(400).json({ message: "Le livre n'est pas disponible pour le renouvellement" });
-      return;
-    }
 
     // Mettre à jour la date de retour de l'emprunt
     const today = new Date();

@@ -1,7 +1,7 @@
 const livreModel = require("../models/livreModel")
-const nodemailer = require("nodemailer")
 const UserModel = require("../models/userModel")
 const expressAsyncHandler = require("express-async-handler");
+const nodemailer = require("nodemailer");
 
 //Afficher touts les livres
 
@@ -33,11 +33,6 @@ exports.getAllLivres = expressAsyncHandler(async (req, res) => {
 });
 
 
-
-
-
-
-
 //Ajouter un livre
 exports.postLivre = expressAsyncHandler(async (req, res) => {
   try {
@@ -50,6 +45,7 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
       !nombreExemplairesEmpruntes ||
       !auteur 
     ) {
+      
       res.status(400).json("Impossible d'ajouter le livre a la bibliothèque !!")
     }
 
@@ -63,7 +59,37 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
         disponible
 
     })
-    
+    const utilisateurs = await UserModel.find()
+
+    utilisateurs.forEach( users => {
+      // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+  
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      auth: {
+          user: 'cory95@ethereal.email',
+          pass: 'XPhdMc6YWteZ9bMuSc'
+      }
+  });
+  
+    // send mail with defined transport object
+    let info =  transporter.sendMail({
+      from: 'rezigmadjda@gmail.com', // sender address
+      to: users.Mail, // list of receivers
+      subject: "Hello ", // Subject line
+      text: `Nouveau livre ajouté  ${livreModel.nomLivre}`, // plain text body
+    },
+    function (error, info) {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log("Email sent: " + info.response)
+      }
+    })
+    })
     res.status(201).json("Le livre a été ajouté a la bibliothèque !")
   } catch (error) {
     res.status(400)

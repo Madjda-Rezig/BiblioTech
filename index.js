@@ -11,7 +11,7 @@ const categorieRouter = require("./routes/categorieRoute")
 const authRouter = require("./routes/authentificationRoute")
 const empruntRouter = require("./routes/empruntRoute")
 const commentRouter = require("./routes/commentRoute")
-const sendMail = require("./controllers/sendMailController")
+
 const statRouter = require("./routes/statRoute")
 
 require("dotenv").config()
@@ -28,7 +28,7 @@ index.use("/authentification", authRouter)
 index.use("/comment", commentRouter)
 index.use("/stat", statRouter)
 
-index.get("/sendemail",sendMail);
+
 
 index.use("/*", (req, res) => {
   res.status(404).json("Not found!")
