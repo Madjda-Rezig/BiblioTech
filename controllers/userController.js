@@ -25,9 +25,9 @@ exports.ajouterUtilisateur = expressAsyncHandler(async (req, res) => {
   // send mail with defined transport object
   let info =  transporter.sendMail({
     from: 'rezigmadjda@gmail.com', // sender address
-    to: user.Mail, // list of receivers
-    subject: "Hello ", // Subject line
-    text: `bienvenue ${user.nom}`, // plain text body
+    to: user.mail, // list of receivers
+    subject: "Hello  ", // Subject line
+    text: `bienvenue  ${user.nom}`, // plain text body
   },
   function (error, info) {
     if (error) {

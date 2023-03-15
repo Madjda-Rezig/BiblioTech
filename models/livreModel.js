@@ -31,7 +31,6 @@ const livreModel = new mongoose.Schema(
     },
     disponible: {
       type: Boolean,
-      required: true,
       default: true,
     },
   },

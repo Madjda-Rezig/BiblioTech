@@ -48,6 +48,7 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
       
       res.status(400).json("Impossible d'ajouter le livre a la bibliothèque !!")
     }
+    const users = await UserModel.find()
 
     await livreModel.create({
         nomLivre, 
@@ -56,11 +57,10 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
         IdCategorie,
         nombreExemplairesEmpruntes,
         nombreTotalExemplaires,
-        disponible
-
     })
+    
     const utilisateurs = await UserModel.find()
-
+    console.log(utilisateurs)
     utilisateurs.forEach( users => {
       // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
@@ -78,7 +78,7 @@ exports.postLivre = expressAsyncHandler(async (req, res) => {
     // send mail with defined transport object
     let info =  transporter.sendMail({
       from: 'rezigmadjda@gmail.com', // sender address
-      to: users.Mail, // list of receivers
+      to: users.mail, // list of receivers
       subject: "Hello ", // Subject line
       text: `Nouveau livre ajouté  ${livreModel.nomLivre}`, // plain text body
     },
